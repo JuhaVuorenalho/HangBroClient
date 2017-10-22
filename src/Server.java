@@ -12,9 +12,9 @@ public class Server
 		try
 		{
 			ServerSocket serverSocket = new ServerSocket(3000);
-			Socket s = serverSocket.accept();
-
 			System.out.println("IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
+			
+			Socket s = serverSocket.accept();
 		
 			serverSocket.close();
 		} catch (Exception e) {}
