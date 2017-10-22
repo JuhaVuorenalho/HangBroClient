@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-//So is tsadsdfasdf asld:D 
 public class Client
 {
 	public static void main(String[] args)
@@ -30,7 +29,6 @@ public class Client
 				break;
 			default: System.out.println("Wrong command!");
 		}
-		
 		
 		try
 		{
