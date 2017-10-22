@@ -33,6 +33,7 @@ public class Client
 		{
 			Socket clientSocket = new Socket ("127.0.0.1", 3000);
 			System.out.println("Connected to server");
+			System.out.println(Inet4Address.getLocalHost().getHostAddress());
 		} catch (Exception e) {}
 		
 		System.out.println("Failed to connect or the connection was closed");
