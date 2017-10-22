@@ -16,10 +16,12 @@ public class Client
 		
 		String s = "";
 		
+		//Wait for user input
 		try {
 			s = input.readLine();
 		} catch (IOException e1) {}
 		
+		//Check if the user input fits any of the predetermined commands
 		switch(s)
 		{
 			case "start": System.out.println("Starting the server!");
@@ -29,6 +31,7 @@ public class Client
 			default: System.out.println("Wrong command!");
 		}
 		
+		
 		try
 		{
 			Socket clientSocket = new Socket ("127.0.0.1", 3000);
@@ -36,6 +39,6 @@ public class Client
 			System.out.println(Inet4Address.getLocalHost().getHostAddress());
 		} catch (Exception e) {}
 		
-		System.out.println("Failed to connect or the connection was closed");
+		System.out.println("Connection was closed, or program failed to connect");
 	}
 }
