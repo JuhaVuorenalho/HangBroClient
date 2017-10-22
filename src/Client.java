@@ -43,4 +43,16 @@ public class Client
 		
 		System.out.println("Connection was closed, or program failed to connect");
 	}
+	void clientHasJoined() {
+		
+		
+		
+		
+	}
+	void startGame() {
+		
+		
+	}
 }
+
+

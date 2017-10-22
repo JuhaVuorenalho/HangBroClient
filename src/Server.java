@@ -13,7 +13,7 @@ public class Server
 			ServerSocket serverSocket = new ServerSocket(3000);
 			Socket s = serverSocket.accept();
 
-			System.out.println("Bro has connected");
+			System.out.println("Bro has joined");//this has to display "Client x has joined the server" in the client.
 		
 			serverSocket.close();
 		} catch (Exception e) {}
