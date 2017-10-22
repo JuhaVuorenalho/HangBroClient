@@ -1,3 +1,4 @@
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -13,7 +14,7 @@ public class Server
 			ServerSocket serverSocket = new ServerSocket(3000);
 			Socket s = serverSocket.accept();
 
-			System.out.println("Bro has connected");
+			System.out.println("IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 		
 			serverSocket.close();
 		} catch (Exception e) {}

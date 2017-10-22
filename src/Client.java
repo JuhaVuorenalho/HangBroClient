@@ -14,6 +14,7 @@ public class Client
 		System.out.println("---------------------------------------------------------------");
 		
 		String s = "";
+		String IPAdress = "";
 		
 		//Wait for user input
 		try {
@@ -26,17 +27,20 @@ public class Client
 			case "start": System.out.println("Starting the server!");
 				break;
 			case "connect": System.out.println("Write the ip you want to connect to");
+					//Wait for user input
+					try {
+						IPAdress = input.readLine();
+					} catch (IOException e1) {}
 				break;
 			default: System.out.println("Wrong command!");
-		}
+		}		
 		
 		try
 		{
-			Socket clientSocket = new Socket ("127.0.0.1", 3000); //Request permission to the IP address
+			Socket clientSocket = new Socket (IPAdress, 3000); //Request permission to the IP address
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 			
-
 		} catch (Exception e) {}
 		
 		System.out.println("Connection was closed, or program failed to connect");
