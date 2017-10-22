@@ -36,7 +36,7 @@ public class Client
 		{
 			Socket clientSocket = new Socket ("127.0.0.1", 3000); //Request permission to the IP address
 			System.out.println("Connected to server");
-			System.out.println("You are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
+			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 			
 		} catch (Exception e) {}
 		
