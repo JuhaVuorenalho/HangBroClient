@@ -10,7 +10,7 @@ public class Server
 		try
 		{
 			ServerSocket serverSocket = new ServerSocket(3000);
-			Socket s = server.accept();
+			Socket s = serverSocket.accept();
 
 			System.out.println("Bro has connected");
 		
