@@ -11,8 +11,8 @@ public class Server {
 		
 		
 		try {
-			
-		serverSocket = new ServerSocket(3000);
+
+		ServerSocket serverSocket = new ServerSocket(3000);
 		Socket s = server.accept();
 		
 		
