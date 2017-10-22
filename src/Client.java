@@ -36,6 +36,7 @@ public class Client
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 			
+
 		} catch (Exception e) {}
 		
 		System.out.println("Connection was closed, or program failed to connect");
