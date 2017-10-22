@@ -15,6 +15,9 @@ public class Server
 
 			System.out.println("Bro has connected");
 		
+			serverSocket.close();
 		} catch (Exception e) {}
+		
+		System.out.println("I'm the server!");
 	}
 }
