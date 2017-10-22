@@ -1,24 +1,17 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.ClassNotFoundException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class Server
+{
+	public static void main(String[] args)
+	{
+		try
+		{
+			ServerSocket serverSocket = new ServerSocket(3000);
+			Socket s = server.accept();
 
-	public static void main(String[] args) {
+			System.out.println("Bro has connected");
 		
-		
-		try {
-
-		ServerSocket serverSocket = new ServerSocket(3000);
-		Socket s = server.accept();
-		
-		
-		System.out.println("Bro has connected");
-		
-			} catch (Exception e) {}
+		} catch (Exception e) {}
 	}
-
 }
