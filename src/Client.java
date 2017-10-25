@@ -20,12 +20,14 @@ public class Client
 		try {
 			s = input.readLine();
 		} catch (IOException e1) {}
-		
+		// if they write connect
 		if(s== "connect") {
-			System.out.println("Write the ip you want to connect to");
+			System.out.println("Write the ip you want to connect to");// then write an IP address
 			//Wait for user input
 			try {
 				IPAdress = input.readLine();
+				
+				//connect to the IP address given. 
 			} catch (IOException e1) {}
 			
 		}
@@ -40,18 +42,31 @@ public class Client
 			clientSocket.bind(new InetSocketAddress("ServerIP", 3000)); //Juha's test
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
-			
+			// join gameLounge()
 		} catch (Exception e) {}
 		
 		System.out.println("Connection was closed, or program failed to connect");
 	}
-	void clientHasJoined() {
+	void gameLounge() {
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		// Introduction to the game lounge
+		System.out.println("---------------------------------------------------------------");
+		System.out.println("Welcome to the game lounge! Here you can see all players who have joined \n Wait here until someone starts the game. Type \"start\" if you want the game to start :)");
+		System.out.println("---------------------------------------------------------------");
+		// display when a new client join
 		
-		
-		
-		
+		String s = "";
+		try {
+			s = input.readLine();
+		} catch (IOException e1) {}
+		//If the user inputs the "start" command
+		if(s== "start") {
+		startGame(); // the game should start	
+		}
 	}
 	void startGame() {
+		
+		System.out.println("YO it works");
 		//Check if the user input fits any of the predetermined commands
 				/*switch(s)
 				{
