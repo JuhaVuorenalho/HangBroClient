@@ -17,7 +17,7 @@ public class Server
 			Socket s = serverSocket.accept();
 
 
-			System.out.println("Bro has joined");//this has to display "Client x has joined the server" in the client.
+			System.out.println("Bro with ip adress:" + Inet4Address.getLocalHost().getHostAddress() + " has joined the game");//this has to display "Client x has joined the server" in the client.
 
 		
 			serverSocket.close();
