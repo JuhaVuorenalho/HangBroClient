@@ -1,4 +1,5 @@
 import java.net.Inet4Address;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,6 +13,7 @@ public class Server
 		try
 		{
 			ServerSocket serverSocket = new ServerSocket(3000);
+			serverSocket.bind(new InetSocketAddress("serverIP", 3000)); //Juha's test
 			System.out.println("IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 			
 			Socket s = serverSocket.accept();
