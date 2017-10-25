@@ -10,7 +10,7 @@ public class Client
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		
 		System.out.println("---------------------------------------------------------------");
-		System.out.println("Welcome to HangBro! Type \"start\" if you want to make a server or \"connect\" if you have friends :)");
+		System.out.println("Welcome to HangBro! Type \"connect\" if you want to join a game :)");
 		System.out.println("---------------------------------------------------------------");
 		
 		String s = "";
@@ -21,19 +21,18 @@ public class Client
 			s = input.readLine();
 		} catch (IOException e1) {}
 		
-		//Check if the user input fits any of the predetermined commands
-		switch(s)
-		{
-			case "start": System.out.println("Starting the server!");
-				break;
-			case "connect": System.out.println("Write the ip you want to connect to");
-					//Wait for user input
-					try {
-						IPAdress = input.readLine();
-					} catch (IOException e1) {}
-				break;
-			default: System.out.println("Wrong command!");
-		}		
+		if(s== "connect") {
+			System.out.println("Write the ip you want to connect to");
+			//Wait for user input
+			try {
+				IPAdress = input.readLine();
+			} catch (IOException e1) {}
+			
+		}
+		else {
+			System.out.println("Wrong command!");
+		}
+			
 		
 		try
 		{
@@ -53,9 +52,21 @@ public class Client
 		
 	}
 	void startGame() {
-		
+		//Check if the user input fits any of the predetermined commands
+				/*switch(s)
+				{
+					case "start": System.out.println("Starting the server!"); // not an option
+						break;
+					case "connect": System.out.println("Write the ip you want to connect to");
+							//Wait for user input
+							try {
+								IPAdress = input.readLine();
+							} catch (IOException e1) {}
+						break;
+					default: System.out.println("Wrong command!");*/
+				}		
+				
 		
 	}
-}
 
 
