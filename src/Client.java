@@ -128,6 +128,41 @@ public class Client
 	// 	
 		
 	}
+	
+	public static void gameState(String[] args) {
+		
+		//Has to listen for the server to send the state as an integer, 1 or 2. 0 is the normal game state
+		
+		int state = 0;
+		String stateString = null;
+		
+		switch (state) {
+       
+        case 1:  stateString = "Gongratulations Bro, you won!!!";
+        		 endGame();
+        		 gameLounge();
+                 break;
+                 
+        case 2:  stateString = "Bro, you dead :(    "
+        		+ "____\r\n" + 
+        		"  |    |      \r\n" + 
+        		"  |    o      \r\n" + 
+        		"  |   /|\\     \r\n" + 
+        		"  |    |\r\n" + 
+        		"  |   / \\ \r\n" + 
+        		" _|_\r\n" + 
+        		"|   |______\r\n" + 
+        		"|          |\r\n" + 
+        		"|__________|\r\n" + 
+        		"";
+        		 endGame();
+        		 gameLounge();
+                 break;
+		}
+		
+		System.out.println(stateString);
+	}
+	
 }
 
 
