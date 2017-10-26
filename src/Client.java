@@ -58,7 +58,7 @@ public class Client
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("Welcome to the game lounge! Here you can see all players who have joined \n Wait here until someone starts the game. Type \"start\" if you want the game to start :)");
 		System.out.println("---------------------------------------------------------------");
-		// display when a new client join
+		// display when a new client joins
 		
 		String s = "";
 		try {
@@ -78,23 +78,35 @@ public class Client
 		}
 	}
 	static void startGame() {
-		
-		System.out.println("YO it works");
-		//Check if the user input fits any of the predetermined commands
-				/*switch(s)
-				{
-					case "start": System.out.println("Starting the server!"); // not an option
-						break;
-					case "connect": System.out.println("Write the ip you want to connect to");
-							//Wait for user input
-							try {
-								IPAdress = input.readLine();
-							} catch (IOException e1) {}
-						break;
-					default: System.out.println("Wrong command!");*/
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("---------------------------------------------------------------");
+		System.out.println("The game has begun! May the odds be ever in your favor!");
+		System.out.println("---------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------");
+		System.out.println("In order to win the game, you have to guess letters of the word \n If you type the incorrect letter you lose a life");
+		System.out.println("---------------------------------------------------------------");
+		//Receive number of lives from server
+		//Receive word in underscores
+				String s="";
+				try {
+					s = input.readLine();
+				} catch (IOException e1) {}// send this to server for computation
+		// Receive from server if letter is correct or not
+				//Receive indication to wether game continues or not
+				int i = 0;// int for wether game continues or not
+				if (i==0) {
+				endGame();	// ending game
+				}
+				else {// game continues
+				//Receive number of lives from server
+				//Receive word in underscores
 				}		
-				
+	}
+	
+	void endGame() {
+	// 	
 		
 	}
+}
 
 
