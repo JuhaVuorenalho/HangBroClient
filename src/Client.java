@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,11 +22,11 @@ public class Client
 			s = input.readLine();
 		} catch (IOException e1) {}
 		// if they write connect
-		if(s== "connect") {
+		if(Objects.equals(s, "connect")) {
 			System.out.println("Write the ip you want to connect to");// then write an IP address
 			//Wait for user input
 			try {
-				IPAdress = input.readLine();
+				IPAdress = input.readLine(); //Read the IP address 
 				
 				//connect to the IP address given. 
 			} catch (IOException e1) {}
@@ -39,7 +40,6 @@ public class Client
 		try
 		{
 			Socket clientSocket = new Socket (IPAdress, 3000); //Request permission to the IP address
-			clientSocket.bind(new InetSocketAddress("ServerIP", 3000)); //Juha's test
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 			// join gameLounge()
@@ -58,7 +58,9 @@ public class Client
 		String s = "";
 		try {
 			s = input.readLine();
-		} catch (IOException e1) {}
+		} catch (IOException e1) {
+			System.out.println(e1.toString());
+		}
 		//If the user inputs the "start" command
 		if(s== "start") {
 		startGame(); // the game should start	
