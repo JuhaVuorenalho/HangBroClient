@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +22,7 @@ public class Client
 			s = input.readLine();
 		} catch (IOException e1) {}
 		// if they write connect
-		if(s== "connect") {
+		if(Objects.equals(s, "connect")) {
 			System.out.println("Write the ip you want to connect to");// then write an IP address
 			//Wait for user input
 			try {
@@ -57,7 +58,9 @@ public class Client
 		String s = "";
 		try {
 			s = input.readLine();
-		} catch (IOException e1) {}
+		} catch (IOException e1) {
+			System.out.println(e1.toString());
+		}
 		//If the user inputs the "start" command
 		if(s== "start") {
 		startGame(); // the game should start	
