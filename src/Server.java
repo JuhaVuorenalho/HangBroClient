@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Inet4Address;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.concurrent.Executors;
 
 //This is a testing line
 //Push it
+//Hack
 
 public class Server
 {
@@ -33,9 +35,13 @@ public class Server
 			chatReceiver();
 
 			serverSocket.close();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			
+			System.out.println(e.toString());
+			
+
+		}
 		
-		System.out.println("I'm the server!");
 	}
 	
 	static void chatReceiver()
