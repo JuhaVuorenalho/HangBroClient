@@ -54,6 +54,8 @@ public class Client
 		System.out.println("Connection was closed, or program failed to connect");
 	}
 	
+	static BufferedReader input;
+	
 	static void gameLounge() {	
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
@@ -69,7 +71,6 @@ public class Client
 	static void chatHandler()
 	{
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		
 		String s = "";
 		
 		try {
@@ -86,6 +87,7 @@ public class Client
 					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
 				} catch (IOException e) {}
 				clientOut.println(s);
+				//System.out.println("this was sent: " + s);
 				chatHandler();
 			}
 	}
