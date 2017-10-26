@@ -61,23 +61,35 @@ public class Client
 		System.out.println("---------------------------------------------------------------");
 		// display when a new client joins
 		
+		//If the user inputs the "start" command
+		chatHandler();
+	}
+	
+	
+	static void chatHandler() throws IOException
+	{
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		
 		String s = "";
+		
 		try {
 			s = input.readLine();
 		} catch (IOException e1) {
 			System.out.println(e1.toString());
 		}
-		//If the user inputs the "start" command
+		
 		if(s== "start") {
-		startGame(); // the game should start	
-		} else {
-			PrintWriter clientOut = null;
-			try {
-				clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
-			} catch (IOException e) {}
-			clientOut.println(s);
-		}
+			startGame(); // the game should start	
+			} else {
+				PrintWriter clientOut = null;
+				try {
+					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
+				} catch (IOException e) {}
+				clientOut.println(s);
+				chatHandler();
+			}
 	}
+	
 	static void startGame() throws IOException {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("---------------------------------------------------------------");
