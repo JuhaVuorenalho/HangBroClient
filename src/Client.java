@@ -3,9 +3,12 @@ import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 public class Client
 {
+	static Socket clientSocket;
+	
 	public static void main(String[] args)
 	{
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -39,15 +42,17 @@ public class Client
 		
 		try
 		{
-			Socket clientSocket = new Socket (IPAdress, 3000); //Request permission to the IP address
+			//clientSocket = new Socket (IPAdress, 3000); //Request permission to the IP address
+			clientSocket = new Socket ("localhost", 3000); //Request permission to the IP address
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
-			// join gameLounge()
+			
+			gameLounge();
 		} catch (Exception e) {}
 		
 		System.out.println("Connection was closed, or program failed to connect");
 	}
-	void gameLounge() {
+	static void gameLounge() {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
@@ -64,9 +69,15 @@ public class Client
 		//If the user inputs the "start" command
 		if(s== "start") {
 		startGame(); // the game should start	
+		} else {
+			PrintWriter clientOut = null;
+			try {
+				clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
+			} catch (IOException e) {}
+			clientOut.println(s);
 		}
 	}
-	void startGame() {
+	static void startGame() {
 		
 		System.out.println("YO it works");
 		//Check if the user input fits any of the predetermined commands
