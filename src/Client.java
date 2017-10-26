@@ -53,7 +53,7 @@ public class Client
 		
 		System.out.println("Connection was closed, or program failed to connect");
 	}
-	static void gameLounge() {
+	static void gameLounge() throws IOException {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
@@ -78,7 +78,7 @@ public class Client
 			clientOut.println(s);
 		}
 	}
-	static void startGame() {
+	static void startGame() throws IOException {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("The game has begun! May the odds be ever in your favor!");
@@ -88,24 +88,29 @@ public class Client
 		System.out.println("---------------------------------------------------------------");
 		//Receive number of lives from server
 		//Receive word in underscores
-				String s="";
-				try {
-					s = input.readLine();
-				} catch (IOException e1) {}// send this to server for computation
+				
+		char c = (char) System.in.read();		
+					PrintWriter clientOut = null;
+					try {
+						clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
+					} catch (IOException e) {}
+					clientOut.println(c);
+				
 		// Receive from server if letter is correct or not
 				//Receive indication to wether game continues or not
 				//Get the return message from the server
 				 
 	        
-				int i = 0;// int for wether game continues or not
+				int i = 0; // int for wether game continues or not
 				if (i==0) {
 				endGame();	// ending game
 				}
 				else {// game continues
 				//Receive number of lives from server
 				//Receive word in underscores
-				}		
-	}
+				}
+}
+	
 	
 	static void endGame() {
 	// 	
