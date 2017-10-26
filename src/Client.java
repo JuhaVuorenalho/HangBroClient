@@ -137,16 +137,27 @@ public class Client
 	     //Instantiate a BufferedInputStream object for reading incoming socket streams
 	      
 
-	     BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream());
+	    
 	     
 	     //Instantiate an InputStreamReader with the optional character encoding
-	       
 
-	     InputStreamReader isr = new InputStreamReader(bis, "US-ASCII");
+	    
 	      
-	    int state;  
-		state = (Integer.parseInt(Reader.readLine()
+	    int state = 0;
+	    
+		try {
+			
+			BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream());
+			InputStreamReader isr = new InputStreamReader(bis, "US-ASCII");
+			state = isr.read();
+			
+		} catch (IOException e) {}
 		
+
+	
+             
+             
+	
 		String stateString = null;
 		
 		switch (state) {
