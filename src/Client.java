@@ -39,7 +39,6 @@ public class Client
 		try
 		{
 			Socket clientSocket = new Socket (IPAdress, 3000); //Request permission to the IP address
-			clientSocket.bind(new InetSocketAddress("ServerIP", 3000)); //Juha's test
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 			// join gameLounge()
