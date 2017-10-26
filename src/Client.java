@@ -1,10 +1,12 @@
 import java.net.*;
 import java.util.Objects;
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.Reader;
 
 public class Client
 {
@@ -124,21 +126,37 @@ public class Client
 		
 	}
 	
-	public static void gameState(String[] args) {
+	public static void gameStateFromServer(String[] args) {
+	
+		 //Instantiate a BufferedInputStream object for reading
+	     //Instantiate a BufferedInputStream object for reading incoming socket streams
+	      
+
+	     BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream());
+	     
+	     //Instantiate an InputStreamReader with the optional character encoding
+	       
+
+	     InputStreamReader isr = new InputStreamReader(bis, "US-ASCII");
+	      
+	    int state;  
+		state = (Integer.parseInt(Reader.readLine()
 		
-		//Has to listen for the server to send the state as an integer, 1 or 2. 0 is the normal game state
-		
-		int state = 0;
 		String stateString = null;
 		
 		switch (state) {
        
-        case 1:  stateString = "Gongratulations Bro, you won!!!";
+        case 1:  stateString = "Congratulations Bro, you won!";
         		 endGame();
         		 gameLounge();
                  break;
                  
-        case 2:  stateString = "Bro, you dead :(    "
+        case 2:  stateString = "Bad news Bro, you lost. Better luck next time!";
+        		 endGame();
+        		 gameLounge();
+        		 break;
+                 
+        case 3:  stateString = "Bro, you dead :(    "
         		+ "____\r\n" + 
         		"  |    |      \r\n" + 
         		"  |    o      \r\n" + 
