@@ -34,8 +34,16 @@ public class Server
 
 			//This does not really work yet
 			//chatReceiver();
-
-			serverSocket.close();
+			while(true)
+			{
+				BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+				System.out.println(in.readLine());
+				
+				//if(gamestate == 1 || gamestate == 2)
+				//serverSocket.close();
+			}
+			
+			
 		} catch (Exception e) {
 			
 			System.out.println(e.toString());

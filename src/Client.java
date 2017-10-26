@@ -1,12 +1,6 @@
 import java.net.*;
 import java.util.Objects;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.Reader;
+import java.io.*;
 
 public class Client
 {
@@ -68,6 +62,8 @@ public class Client
 		//If the user inputs the "start" command
 		//This does not work yet :/ 
 		//chatHandler();
+		
+		startGame();
 	}
 	
 	
@@ -91,7 +87,8 @@ public class Client
 				} catch (IOException e) {}
 				clientOut.println(s);
 				//System.out.println("this was sent: " + s);
-				chatHandler();
+				//This does not really work
+				//chatHandler();
 			}
 	}
 	
@@ -105,27 +102,33 @@ public class Client
 		System.out.println("---------------------------------------------------------------");
 		//Receive number of lives from server
 		//Receive word in underscores
-				
-		char c = (char) System.in.read();		
-					PrintWriter clientOut = null;
-					try {
-						clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
-					} catch (IOException e) {}
-					clientOut.println(c);
-				
+	
+		int gameState = 0;
+		
+		while(true)
+		{
+			char c = (char) System.in.read();		
+				PrintWriter clientOut = null;
+				try {
+					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
+				} catch (IOException e) {}
+				clientOut.println(c);
+			
 		// Receive from server if letter is correct or not
 				//Receive indication to wether game continues or not
 				//Get the return message from the server
 				 
+				
+				//READ GAMESTATE FROM SERVER!!!!!!!!!!!!!
 	        
 				int i = 0; // int for wether game continues or not
 				if (i==0) {
 				endGame();	// ending game
 				}
 				else {// game continues
-				//Receive number of lives from server
-				//Receive word in underscores
+					gameStateFromServer(gameState);
 				}
+		}
 }
 	
 	
@@ -134,10 +137,7 @@ public class Client
 		
 	}
 	
-	public static void gameStateFromServer(String[] args) {
-	
-	    
-	    int state = 0;
+	public static void gameStateFromServer(int state) {
 	    
 		try {
 			
@@ -166,7 +166,6 @@ public class Client
         case 2:  stateString = "Bad news Bro, you lost. Better luck next time!";
         		 endGame();
         	//	 gameLounge();
-        		 break;
                  
         case 3:  stateString = "Bro, you dead :(    "
         		+ "____\r\n" + 
