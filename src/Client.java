@@ -2,6 +2,7 @@ import java.net.*;
 import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
@@ -93,6 +94,9 @@ public class Client
 				} catch (IOException e1) {}// send this to server for computation
 		// Receive from server if letter is correct or not
 				//Receive indication to wether game continues or not
+				//Get the return message from the server
+				 
+	        
 				int i = 0;// int for wether game continues or not
 				if (i==0) {
 				endGame();	// ending game
