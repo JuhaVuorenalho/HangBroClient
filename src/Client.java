@@ -1,12 +1,6 @@
 import java.net.*;
 import java.util.Objects;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.Reader;
+import java.io.*;
 
 public class Client
 {
@@ -55,8 +49,10 @@ public class Client
 		
 		System.out.println("Connection was closed, or program failed to connect");
 	}
+	
+	static BufferedReader input;
+	
 	static void gameLounge() throws IOException {
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("Welcome to the game lounge! Here you can see all players who have joined \n Wait here until someone starts the game. Type \"start\" if you want the game to start :)");
@@ -64,14 +60,16 @@ public class Client
 		// display when a new client joins
 		
 		//If the user inputs the "start" command
-		chatHandler();
+		//This does not work yet :/ 
+		//chatHandler();
+		
+		startGame();
 	}
 	
 	
 	static void chatHandler() throws IOException
 	{
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		
 		String s = "";
 		
 		try {
@@ -88,7 +86,9 @@ public class Client
 					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
 				} catch (IOException e) {}
 				clientOut.println(s);
-				chatHandler();
+				//System.out.println("this was sent: " + s);
+				//This does not really work
+				//chatHandler();
 			}
 	}
 	
@@ -102,27 +102,33 @@ public class Client
 		System.out.println("---------------------------------------------------------------");
 		//Receive number of lives from server
 		//Receive word in underscores
-				
-		char c = (char) System.in.read();		
-					PrintWriter clientOut = null;
-					try {
-						clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
-					} catch (IOException e) {}
-					clientOut.println(c);
-				
+	
+		int gameState = 0;
+		
+		while(true)
+		{
+			char c = (char) System.in.read();		
+				PrintWriter clientOut = null;
+				try {
+					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
+				} catch (IOException e) {}
+				clientOut.println(c);
+			
 		// Receive from server if letter is correct or not
 				//Receive indication to wether game continues or not
 				//Get the return message from the server
 				 
+				
+				//READ GAMESTATE FROM SERVER!!!!!!!!!!!!!
 	        
 				int i = 0; // int for wether game continues or not
 				if (i==0) {
 				endGame();	// ending game
 				}
 				else {// game continues
-				//Receive number of lives from server
-				//Receive word in underscores
+					gameStateFromServer(gameState);
 				}
+		}
 }
 	
 	
@@ -131,35 +137,35 @@ public class Client
 		
 	}
 	
-	public static void gameStateFromServer(String[] args) {
+	public static void gameStateFromServer(int state) {
+	    
+		try {
+			
+			//Instantiate a BufferedInputStream object for reading
+		    //Instantiate a BufferedInputStream object for reading incoming socket streams
+			
+			BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream());
+			
+			//Instantiate an InputStreamReader with the optional character encoding
+			
+			InputStreamReader isr = new InputStreamReader(bis, "US-ASCII");
+			state = isr.read();
+			
+		} catch (IOException e) {}
+  
 	
-		 //Instantiate a BufferedInputStream object for reading
-	     //Instantiate a BufferedInputStream object for reading incoming socket streams
-	      
-
-	     BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream());
-	     
-	     //Instantiate an InputStreamReader with the optional character encoding
-	       
-
-	     InputStreamReader isr = new InputStreamReader(bis, "US-ASCII");
-	      
-	    int state;  
-		state = (Integer.parseInt(Reader.readLine()
-		
 		String stateString = null;
 		
 		switch (state) {
        
         case 1:  stateString = "Congratulations Bro, you won!";
         		 endGame();
-        		 gameLounge();
+        	//	 gameLounge();
                  break;
                  
         case 2:  stateString = "Bad news Bro, you lost. Better luck next time!";
         		 endGame();
-        		 gameLounge();
-        		 break;
+        	//	 gameLounge();
                  
         case 3:  stateString = "Bro, you dead :(    "
         		+ "____\r\n" + 
@@ -174,7 +180,7 @@ public class Client
         		"|__________|\r\n" + 
         		"";
         		 endGame();
-        		 gameLounge();
+        	//	 gameLounge();
                  break;
 		}
 		
