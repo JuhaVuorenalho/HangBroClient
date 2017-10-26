@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -12,29 +14,44 @@ import java.util.concurrent.Executors;
 
 public class Server
 {
+	static Socket clientSocket;
+	static ServerSocket serverSocket;
+	
 	public static void main(String[] args)
 	{
-		ExecutorService executor = Executors.newSingleThreadExecutor();;
-	
 		try
 		{
-			ServerSocket serverSocket = new ServerSocket(3000);
+			serverSocket = new ServerSocket(3000);
 			System.out.println("IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
 			
 			//executor.submit(new SocketHandler(serverSocket.accept()));
 			//Socket s = serverSocket.accept();
-			Socket clientSocket = serverSocket.accept();
-
-
+			clientSocket = serverSocket.accept();
 
 			System.out.println("Bro with ip adress:" + Inet4Address.getLocalHost().getHostAddress() + " has joined the game");//this has to display "Client x has joined the server" in the client.
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			System.out.println(in.readLine());
+			chatReceiver();
 
 			serverSocket.close();
 		} catch (Exception e) {}
 		
 		System.out.println("I'm the server!");
+	}
+	
+	static void chatReceiver()
+	{
+		try 
+		{
+			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			
+			if(Objects.equals(in.readLine(), "close"))
+				serverSocket.close();
+			
+			System.out.println(in.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		chatReceiver();
 	}
 }
