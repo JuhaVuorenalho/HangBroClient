@@ -25,7 +25,7 @@ public class Client
 			System.out.println("Write the ip you want to connect to");// then write an IP address
 			//Wait for user input
 			try {
-				IPAdress = input.readLine();
+				IPAdress = input.readLine(); //Read the IP address 
 				
 				//connect to the IP address given. 
 			} catch (IOException e1) {}
