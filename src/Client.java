@@ -136,32 +136,36 @@ public class Client
 	
 	public static void gameStateFromServer(String[] args) {
 	
-		 //Instantiate a BufferedInputStream object for reading
-	     //Instantiate a BufferedInputStream object for reading incoming socket streams
-	      
-
-	     BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream());
-	     
-	     //Instantiate an InputStreamReader with the optional character encoding
-	       
-
-	     InputStreamReader isr = new InputStreamReader(bis, "US-ASCII");
-	      
-	    int state;  
-		state = (Integer.parseInt(Reader.readLine()));
-		
+	    
+	    int state = 0;
+	    
+		try {
+			
+			//Instantiate a BufferedInputStream object for reading
+		    //Instantiate a BufferedInputStream object for reading incoming socket streams
+			
+			BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream());
+			
+			//Instantiate an InputStreamReader with the optional character encoding
+			
+			InputStreamReader isr = new InputStreamReader(bis, "US-ASCII");
+			state = isr.read();
+			
+		} catch (IOException e) {}
+  
+	
 		String stateString = null;
 		
 		switch (state) {
        
         case 1:  stateString = "Congratulations Bro, you won!";
         		 endGame();
-        		 gameLounge();
+        	//	 gameLounge();
                  break;
                  
         case 2:  stateString = "Bad news Bro, you lost. Better luck next time!";
         		 endGame();
-        		 gameLounge();
+        	//	 gameLounge();
         		 break;
                  
         case 3:  stateString = "Bro, you dead :(    "
@@ -177,7 +181,7 @@ public class Client
         		"|__________|\r\n" + 
         		"";
         		 endGame();
-        		 gameLounge();
+        	//	 gameLounge();
                  break;
 		}
 		
