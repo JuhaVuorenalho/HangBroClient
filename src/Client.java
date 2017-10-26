@@ -107,7 +107,7 @@ public class Client
 				}		
 	}
 	
-	void endGame() {
+	static void endGame() {
 	// 	
 		
 	}
