@@ -1,4 +1,5 @@
 import java.net.Inet4Address;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -7,6 +8,7 @@ import java.util.concurrent.Executors;
 
 //This is a testing line
 //Push it
+//Hack
 
 public class Server
 {
@@ -28,10 +30,13 @@ public class Server
 			System.out.println("Bro with ip adress:" + Inet4Address.getLocalHost().getHostAddress() + " has joined the game");//this has to display "Client x has joined the server" in the client.
 
 		
-
 			serverSocket.close();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			
+			System.out.println(e.toString());
+			
+
+		}
 		
-		System.out.println("I'm the server!");
 	}
 }
