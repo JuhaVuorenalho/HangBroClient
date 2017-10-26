@@ -32,14 +32,13 @@ public class Server
 
 			System.out.println("Bro with ip adress:" + Inet4Address.getLocalHost().getHostAddress() + " has joined the game");//this has to display "Client x has joined the server" in the client.
 
-			chatReceiver();
+			//This does not really work yet
+			//chatReceiver();
 
 			serverSocket.close();
 		} catch (Exception e) {
 			
 			System.out.println(e.toString());
-			
-
 		}
 		
 	}

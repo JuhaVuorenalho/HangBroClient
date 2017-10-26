@@ -59,7 +59,6 @@ public class Client
 	static BufferedReader input;
 	
 	static void gameLounge() throws IOException {
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("Welcome to the game lounge! Here you can see all players who have joined \n Wait here until someone starts the game. Type \"start\" if you want the game to start :)");
@@ -67,7 +66,8 @@ public class Client
 		// display when a new client joins
 		
 		//If the user inputs the "start" command
-		chatHandler();
+		//This does not work yet :/ 
+		//chatHandler();
 	}
 	
 	
