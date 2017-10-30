@@ -8,6 +8,7 @@ public class Client
 	
 	public static void main(String[] args)
 	{
+//User enters the main lounge. Option: to join existing game--------------------------------------------------------
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		
 		System.out.println("---------------------------------------------------------------");
@@ -43,15 +44,15 @@ public class Client
 			clientSocket = new Socket ("localhost", 3000); //Request permission to the IP address
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
-			
+
 			gameLounge();
 		} catch (Exception e) {}
 		
 		System.out.println("Connection was closed, or program failed to connect");
 	}
-	
+//--------------------------Main lounge above----------------------------------------------------------------------------------------
 	static BufferedReader input;
-	
+// Enters Game lounge.Options: start game--------------------------------------------------------------------------------------------	
 	static void gameLounge() throws IOException {
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
@@ -62,11 +63,11 @@ public class Client
 		//If the user inputs the "start" command
 		//This does not work yet :/ 
 		//chatHandler();
-		
+
 		startGame();
 	}
 	
-	
+// A chat?
 	static void chatHandler() throws IOException
 	{
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -91,6 +92,8 @@ public class Client
 				//chatHandler();
 			}
 	}
+	
+// The game starts. Options: enter letter -------------------------------------------------------------------------------------------
 	
 	static void startGame() throws IOException {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -131,7 +134,7 @@ public class Client
 		}
 }
 	
-	
+// Game ends. --------------------------------------------------------------------------------------------------------------------
 	static void endGame() {
 	// 	
 		
