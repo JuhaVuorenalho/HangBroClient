@@ -1,11 +1,15 @@
 import java.net.*;
 import java.util.Objects;
+import java.util.Scanner;
 import java.io.*;
 
 public class Client
 {
 	static BufferedReader input;
 	static Socket clientSocket;
+	static PrintWriter clientOut;
+	static BufferedReader inFromServer;
+    static BufferedReader inFromUser;
 	
 	public static void main(String[] args)
 	{
@@ -54,16 +58,25 @@ public class Client
 //--------------------------Main lounge above----------------------------------------------------------------------------------------
 // Enters Game lounge.Options: start game--------------------------------------------------------------------------------------------	
 	static void gameLounge() throws IOException {
+		//nickname being created---------------------
+		Scanner input = new Scanner(System.in);
+		String nickname = "";//the nickname chosen
+		 String s = "";
+		 try {
+             nickname = input.nextLine(); //reads the nickname
+             clientOut.println(nickname);
+        //-------------------------------------------
+
+             //gameRunning = true;
+         } catch (Exception e){}
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("Welcome to the game lounge! Here you can see all players who have joined \n Wait here until someone starts the game. Type \"start\" if you want the game to start :)");
 		System.out.println("---------------------------------------------------------------");
 		// display when a new client joins
 		
-		//If the user inputs the "start" command
-		//This does not work yet :/ 
-		//chatHandler();
-
+		//If the user inputs the "start" command the server should receive this and start the game on all clients. 
+		
 		startGame();
 	}
 	
@@ -108,20 +121,40 @@ public class Client
 		//Receive number of lives from server
 		//Receive word in underscores
 	
-		int gameState = 0;
 		
-		while(true)// Sending in letters to the server
-		{
-			char c = (char) System.in.read();		
-				PrintWriter clientOut = null;
-				try {
-					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
-				} catch (IOException e) {}
-				clientOut.println(c);
+		String string = null;
+		boolean gameRunning = false;
+		//receiving string from server---------------------------------------
+				  try {
+
+		                inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+		            } catch (Exception e){
+		                e.printStackTrace();
+		            }
+		            do {
+		                try {
+		  //receive from server---------------------------------------------
+		                	//READ STRING AND GAMESTATE FROM SERVER! Currently working on it
+		                    while(inFromServer.ready() && (string = inFromServer.readLine()) != null) {
+		                        if(string.equals("*") || string.equals(" -> ") || string.length() == 1) {
+		                            System.out.print(string);
+		                        } else {
+		                            System.out.print("\n" + string);
+		                        }
+		                    }
+		 //sending to server-------------------------------------------------
+		                    inFromUser = new BufferedReader( new InputStreamReader(System.in));
+		                    char i = inFromUser.readLine().charAt(0);
+		                    System.out.println(i);
+		                    clientOut.println(i);
+		                    
+		                } catch (Exception e){}
+		            } while(gameRunning);
+		            
+		// Deal with gameState received from server--------------------------
+		            int gameState = 0;
 				
-			
-				
-				//READ STRING AND GAMESTATE FROM SERVER! Nynne currently working on it
 	        
 				//display String
 				//process gameState
@@ -133,7 +166,7 @@ public class Client
 					gameStateFromServer(gameState);
 				}
 		}
-}
+
 	
 // GameStates. --------------------------------------------------------------------------------------------------------------------
 
