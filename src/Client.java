@@ -110,7 +110,7 @@ public class Client
 	
 		int gameState = 0;
 		
-		while(true)
+		while(true)// Sending in letters to the server
 		{
 			char c = (char) System.in.read();		
 				PrintWriter clientOut = null;
@@ -119,8 +119,12 @@ public class Client
 				} catch (IOException e) {}
 				clientOut.println(c);
 				
-				//READ STRING AND GAMESTATE FROM SERVER!!!!!!!!!!!!!
+			
+				
+				//READ STRING AND GAMESTATE FROM SERVER! Nynne currently working on it
 	        
+				//display String
+				//process gameState
 				int i = 0; // int for wether game continues or not
 				if (i==0) {
 				// ending game
@@ -156,12 +160,12 @@ public class Client
 		switch (state) {
        
         case 1:  stateString = "Congratulations Bro, you won!";
-        		 endGame();
+        	//End server after 10 seconds
         	//	 gameLounge();
                  break;
                  
         case 2:  stateString = "Bad news Bro, you lost. Better luck next time!";
-        		 endGame();
+        	//End server after 10 seconds
         	//	 gameLounge();
                  
         case 3:  stateString = "Bro, you dead :(    "
@@ -176,7 +180,7 @@ public class Client
         		"|          |\r\n" + 
         		"|__________|\r\n" + 
         		"";
-        		 endGame();
+        	//End server after 10 seconds
         	//	 gameLounge();
                  break;
 		}
