@@ -37,7 +37,12 @@ public class Server
 			while(true)
 			{
 				BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-				System.out.println(in.readLine());
+				System.out.println("in.readLine = " + in.readLine());
+				System.out.println("in.read = " + in.read());
+				System.out.println("in.toString = " + in.toString());
+				
+				if(Objects.equals(in.toString(), "l"))
+					System.out.println("you lost");
 				
 				//if(gamestate == 1 || gamestate == 2)
 				//serverSocket.close();
