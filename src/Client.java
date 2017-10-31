@@ -4,6 +4,7 @@ import java.io.*;
 
 public class Client
 {
+	static BufferedReader input;
 	static Socket clientSocket;
 	
 	public static void main(String[] args)
@@ -51,7 +52,6 @@ public class Client
 		System.out.println("Connection was closed, or program failed to connect");
 	}
 //--------------------------Main lounge above----------------------------------------------------------------------------------------
-	static BufferedReader input;
 // Enters Game lounge.Options: start game--------------------------------------------------------------------------------------------	
 	static void gameLounge() throws IOException {
 		// Introduction to the game lounge
@@ -96,6 +96,8 @@ public class Client
 // The game starts. Options: enter letter -------------------------------------------------------------------------------------------
 	
 	static void startGame() throws IOException {
+	// send to server to startGame on all Clients. 
+		
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("The game has begun! May the odds be ever in your favor!");
@@ -116,17 +118,12 @@ public class Client
 					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
 				} catch (IOException e) {}
 				clientOut.println(c);
-			
-		// Receive from server if letter is correct or not
-				//Receive indication to wether game continues or not
-				//Get the return message from the server
-				 
 				
-				//READ GAMESTATE FROM SERVER!!!!!!!!!!!!!
+				//READ STRING AND GAMESTATE FROM SERVER!!!!!!!!!!!!!
 	        
 				int i = 0; // int for wether game continues or not
 				if (i==0) {
-				endGame();	// ending game
+				// ending game
 				}
 				else {// game continues
 					gameStateFromServer(gameState);
@@ -134,11 +131,8 @@ public class Client
 		}
 }
 	
-// Game ends. --------------------------------------------------------------------------------------------------------------------
-	static void endGame() {
-	// 	
-		
-	}
+// GameStates. --------------------------------------------------------------------------------------------------------------------
+
 	
 	public static void gameStateFromServer(int state) {
 	    
