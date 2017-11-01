@@ -3,7 +3,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Inet4Address;
 
 import java.net.ServerSocket;
@@ -81,6 +80,24 @@ public class Server
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		chatReceiver();
+	}
+	
+	void commands() {
+		try {
+		String command = "";
+		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		switch (command) {
+		case "start":
+			//gameStart();
+		break;
+		case ".*123":
+			// check if the character matches a letter in the word. 
+		break;
+		}
+		}catch (IOException e) {
+		e.printStackTrace();	
 		}
 		chatReceiver();
 	}

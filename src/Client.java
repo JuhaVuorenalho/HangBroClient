@@ -1,13 +1,19 @@
 import java.net.*;
 import java.util.Objects;
+import java.util.Scanner;
 import java.io.*;
 
 public class Client
 {
+	static BufferedReader input;
 	static Socket clientSocket;
+	static PrintWriter clientOut;
+	static BufferedReader inFromServer;
+    static BufferedReader inFromUser;
 	
 	public static void main(String[] args)
 	{
+//User enters the main lounge. Option: to join existing game--------------------------------------------------------
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		
 		System.out.println("---------------------------------------------------------------");
@@ -43,30 +49,38 @@ public class Client
 			clientSocket = new Socket ("localhost", 3000); //Request permission to the IP address
 			System.out.println("Connected to server");
 			System.out.println("Bro, you are connected to the IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
-			
+
 			gameLounge();
 		} catch (Exception e) {}
 		
 		System.out.println("Connection was closed, or program failed to connect");
 	}
-	
-	static BufferedReader input;
-	
+//--------------------------Main lounge above----------------------------------------------------------------------------------------
+// Enters Game lounge.Options: start game--------------------------------------------------------------------------------------------	
 	static void gameLounge() throws IOException {
+		//nickname being created---------------------
+		Scanner input = new Scanner(System.in);
+		String nickname = "";//the nickname chosen
+		 String s = "";
+		 try {
+             nickname = input.nextLine(); //reads the nickname
+             clientOut.println(nickname);
+        //-------------------------------------------
+
+             //gameRunning = true;
+         } catch (Exception e){}
 		// Introduction to the game lounge
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("Welcome to the game lounge! Here you can see all players who have joined \n Wait here until someone starts the game. Type \"start\" if you want the game to start :)");
 		System.out.println("---------------------------------------------------------------");
 		// display when a new client joins
 		
-		//If the user inputs the "start" command
-		//This does not work yet :/ 
-		//chatHandler();
+		//If the user inputs the "start" command the server should receive this and start the game on all clients. 
 		
 		startGame();
 	}
 	
-	
+// A chat?
 	static void chatHandler() throws IOException
 	{
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -92,7 +106,11 @@ public class Client
 			}
 	}
 	
+// The game starts. Options: enter letter -------------------------------------------------------------------------------------------
+	
 	static void startGame() throws IOException {
+	// send to server to startGame on all Clients. 
+		
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("The game has begun! May the odds be ever in your favor!");
@@ -103,39 +121,55 @@ public class Client
 		//Receive number of lives from server
 		//Receive word in underscores
 	
-		int gameState = 0;
 		
-		while(true)
-		{
-			char c = (char) System.in.read();		
-				PrintWriter clientOut = null;
-				try {
-					clientOut = new PrintWriter(clientSocket.getOutputStream(), true);
-				} catch (IOException e) {}
-				clientOut.println(c);
-			
-		// Receive from server if letter is correct or not
-				//Receive indication to wether game continues or not
-				//Get the return message from the server
-				 
+		String string = null;
+		boolean gameRunning = false;
+		//receiving string from server---------------------------------------
+				  try {
+
+		                inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+		            } catch (Exception e){
+		                e.printStackTrace();
+		            }
+		            do {
+		                try {
+		  //receive from server---------------------------------------------
+		                	//READ STRING AND GAMESTATE FROM SERVER! Currently working on it
+		                    while(inFromServer.ready() && (string = inFromServer.readLine()) != null) {
+		                        if(string.equals("*") || string.equals(" -> ") || string.length() == 1) {
+		                            System.out.print(string);
+		                        } else {
+		                            System.out.print("\n" + string);
+		                        }
+		                    }
+		 //sending to server-------------------------------------------------
+		                    inFromUser = new BufferedReader( new InputStreamReader(System.in));
+		                    char i = inFromUser.readLine().charAt(0);
+		                    System.out.println(i);
+		                    clientOut.println(i);
+		                    
+		                } catch (Exception e){}
+		            } while(gameRunning);
+		            
+		// Deal with gameState received from server--------------------------
+		            int gameState = 0;
 				
-				//READ GAMESTATE FROM SERVER!!!!!!!!!!!!!
 	        
+				//display String
+				//process gameState
 				int i = 0; // int for wether game continues or not
 				if (i==0) {
-				endGame();	// ending game
+				// ending game
 				}
 				else {// game continues
 					gameStateFromServer(gameState);
 				}
 		}
-}
+
 	
-	
-	static void endGame() {
-	// 	
-		
-	}
+// GameStates. --------------------------------------------------------------------------------------------------------------------
+
 	
 	public static void gameStateFromServer(int state) {
 	    
@@ -159,12 +193,12 @@ public class Client
 		switch (state) {
        
         case 1:  stateString = "Congratulations Bro, you won!";
-        		 endGame();
+        	//End server after 10 seconds
         	//	 gameLounge();
                  break;
                  
         case 2:  stateString = "Bad news Bro, you lost. Better luck next time!";
-        		 endGame();
+        	//End server after 10 seconds
         	//	 gameLounge();
                  
         case 3:  stateString = "Bro, you dead :(    "
@@ -179,7 +213,7 @@ public class Client
         		"|          |\r\n" + 
         		"|__________|\r\n" + 
         		"";
-        		 endGame();
+        	//End server after 10 seconds
         	//	 gameLounge();
                  break;
 		}
