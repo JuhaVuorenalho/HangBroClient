@@ -48,6 +48,7 @@ public class Server {
                 // handler.start() might have to be moved out of while-loop
                 handler.start();
 
+
             }
 
                 //when all clients have typed start it should stop the listening loop and jump to game (handler.start)
@@ -61,5 +62,102 @@ public class Server {
         }
 
     }
+
+//This is a testing line
+//Push it
+//Hack
+
+public class Server
+{
+	static Socket clientSocket;
+	static ServerSocket serverSocket;
+	
+	public static void main(String[] args)
+	{
+		try
+		{
+			serverSocket = new ServerSocket(3000);
+			System.out.println("IP address: " + Inet4Address.getLocalHost().getHostAddress());  //The IP address user connected to
+			
+			//executor.submit(new SocketHandler(serverSocket.accept()));
+			//Socket s = serverSocket.accept();
+			clientSocket = serverSocket.accept();
+
+			System.out.println("Bro with ip adress:" + Inet4Address.getLocalHost().getHostAddress() + " has joined the game");//this has to display "Client x has joined the server" in the client.
+			
+			
+
+			
+	        //System.out.println(din.readInt());
+			//This does not really work yet
+			//chatReceiver();
+			while(true)
+			{
+				BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+				System.out.println("in.readLine = " + in.readLine());
+				System.out.println("in.read = " + in.read());
+				System.out.println("in.toString = " + in.toString());
+				
+				if(Objects.equals(in.toString(), "l"))
+					System.out.println("you lost");
+				
+				//if(gamestate == 1 || gamestate == 2)
+				//serverSocket.close();
+				
+				//To send gamestate int to the client, the receiver is missing still from the client
+				int gameState = 0;		
+				PrintWriter serverOut = null;
+				try {
+					serverOut = new PrintWriter(clientSocket.getOutputStream(), true);
+				} catch (IOException e) {}
+				serverOut.println(gameState);
+			}
+			
+			
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.toString());
+		}
+		
+		
+	}
+	
+	static void chatReceiver()
+	{
+		try 
+		{
+			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			
+			if(Objects.equals(in.readLine(), "close"))
+				serverSocket.close();
+			
+			System.out.println(in.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		chatReceiver();
+	}
+	
+	void commands() {
+		try {
+		String command = "";
+		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		switch (command) {
+		case "start":
+			//gameStart();
+		break;
+		case ".*123":
+			// check if the character matches a letter in the word. 
+		break;
+		}
+		}catch (IOException e) {
+		e.printStackTrace();	
+		}
+		chatReceiver();
+	}
+>>>>>>> c28c84365beab70134f38d26ad8fdb9f4dd5bec8
 }
 
