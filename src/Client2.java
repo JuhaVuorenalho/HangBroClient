@@ -3,7 +3,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.io.*;
 
-public class Client
+public class Client2
 {
 	static BufferedReader input;
 	static Socket clientSocket;
